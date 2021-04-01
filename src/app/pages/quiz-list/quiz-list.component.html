@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="btns mb-4">
+            <a [routerLink]="['/edit-quiz']" class="btn btn-primary"><i class="fa fa-plus"></i> Create a new quiz</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let quiz of quizzes">
+                    <td>{{quiz.title}}</td>
+                    <td>{{quiz.description}}</td>
+                    <td><a [routerLink]="['/edit-quiz', quiz.id]" class="btn btn-primary"><i class="fa fa-pencil-alt"></i></a></td>
+                    <td><button (click)="onDelete(quiz.id!)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>

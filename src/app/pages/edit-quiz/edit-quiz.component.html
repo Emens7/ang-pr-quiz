@@ -1,0 +1,87 @@
+<div class="row">
+  <div *ngIf="quizForm as f" class="col-md-12">
+      <h3>Edit quiz</h3>
+      <hr>
+      <form [formGroup]="f">
+          <div class="form-group">
+              <label for="title-input">Title</label>
+              <input type="text" required formControlName="title" placeholder="Title" class="form-control" id="title-input">
+              
+              <div *ngIf="f.controls.title.invalid && (f.controls.title.dirty || f.controls.title.touched)">
+                <span class="text-danger" *ngIf="f.controls.title.errors?.required">
+                    The title field is required.
+                </span>
+              </div>
+
+            </div>
+
+            <div class="form-check mb-2">
+              <input type="checkbox" formControlName="active" class="form-check-input" id="active-input">
+              <label class="form-check-label" for="active-input">Active</label>
+            </div>
+
+            <div class="form-group">
+              <label for="description-input">Description</label>
+              <textarea required formControlName="description" placeholder="Description..." class="form-control" id="description-input"></textarea>
+              
+              <div *ngIf="f.controls.description.invalid && (f.controls.description.dirty || f.controls.description.touched)">
+                <span class="text-danger" *ngIf="f.controls.description.errors?.required">
+                    The description field is required.
+                </span>
+              </div>
+
+            </div>
+
+            <div *ngFor="let question of $any(quizForm).controls.questions.controls; let i = index;" class="card mb-4">
+                <div class="card-body" [formGroup]="question">
+                  <h5>{{(i + 1)}}. Question</h5>
+
+                  <input type="text" formControlName="text" required class="form-control" placeholder="What is the question?">
+                  
+                  <div *ngIf="question.controls.text.invalid && (question.controls.text.dirty || question.controls.text.touched)">
+                      <span class="text-danger" *ngIf="question.controls.text.errors?.required">
+                          The question field is required.
+                      </span>
+                  </div>
+
+                  <div *ngFor="let answer of question.controls.answers.controls; let j = index;" class="answers">
+
+                    <div class="input-group mb-2 mt-2" [formGroup]="answer">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <input type="checkbox" formControlName="isCorrect">
+                        </div>
+                      </div>
+                      <input type="text" formControlName="text" class="form-control" placeholder="Answer...">
+                      <div class="input-group-append">
+                        <button (click)="removeAnswer(i, j)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                      </div>
+
+                      <div class="col-md-12" *ngIf="answer.controls.text.invalid && (answer.controls.text.dirty || answer.controls.text.touched)">
+                        <span class="text-danger" *ngIf="answer.controls.text.errors?.required">
+                            The answer is required.
+                        </span>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <div class="form-group mt-2">
+                      <button (click)="addAnswer(i)" class="btn btn-primary">Add answer</button>
+                      <button (click)="removeQuestion(i)" class="btn btn-danger float-right">Delete the question</button>
+                  </div>
+                  
+                </div>
+              
+            </div>
+
+            <button (click)="addQuestion()" class="btn btn-primary">Add new question</button>
+
+            <hr>
+
+            <button (click)="onSave()" [disabled]="!f.valid" class="btn btn-primary btn-lg mb-4">Save</button>
+
+      </form>
+  </div>
+</div>

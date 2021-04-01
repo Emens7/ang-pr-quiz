@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+    <a class="navbar-brand" [routerLink]="['/']">Quiz</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/']">Home <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li *ngIf="isTeacher" class="nav-item">
+            <a class="nav-link" [routerLink]="['/quiz-list']">Manage quizzes</a>
+        </li>
+
+        <!--<li *ngIf="isTeacher" class="nav-item">
+            <a class="nav-link" [routerLink]="['/students']">Student results</a>
+        </li>-->
+        
+      </ul>
+
+      <ul class="nav-link" class="navbar-nav navbar-right">
+        
+        <li *ngIf="!(auth.user | async)" class="nav-item">
+          <a class="nav-link" [routerLink]="['/register']">Register</a>
+        </li>
+
+        <li *ngIf="!(auth.user | async)" class="nav-item">
+          <a class="nav-link" [routerLink]="['/login']">Login</a>
+        </li>
+
+        <li *ngIf="(auth.user | async)" class="nav-item">
+            <a class="nav-link" href="#" (click)="onLogout()">Logout</a>
+        </li>
+        
+      </ul>
+      
+    </div>
+  </nav>

@@ -1,0 +1,26 @@
+<div class="row">
+    <div *ngIf="quiz" class="col-md-12 text-center">
+      <section *ngIf="quizzinProgress" class="quiz">
+        <button (click)="nextQuestion()" *ngIf="answerSelected" class="btn btn-block btn-warning mb-3">Next</button>
+        <div *ngIf="answerSelected && isCorrect" class="alert alert-success">
+          <strong>Correct answer!</strong>
+        </div>
+
+        <div *ngIf="answerSelected && !isCorrect" class="alert alert-danger">
+          <strong>Wrong answer!</strong>
+          <p class="mb-0">The correct answer: {{correctAnswer}}</p>
+        </div>
+
+          <h5>{{quiz.questions[questionIndex].text}}</h5>
+          <div class="answers">
+            <button (click)="selectAnswer(i)" [disabled]="answerSelected" *ngFor="let answer of quiz.questions[questionIndex].answers; let i = index" class="btn btn-block btn-primary">
+              {{answer.text}}
+            </button>
+          </div>
+      </section>
+      <section *ngIf="!quizzinProgress">
+        <h3>Result</h3>
+        <p>{{score}} / {{maxScore}}</p>
+      </section>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "quiz-a4df5": {
+      "hosting": {
+        "ngquiz": [
+          "quiz-a4df5"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1>Login</h1>
+        <hr>
+        <div class="col-md-6">
+            <form #userDataForm="ngForm">
+                <div class="form-group">
+                  <label for="email-input">Email</label>
+                  <input type="email" required email name="email" [(ngModel)]="email" #emailInput="ngModel" placeholder="Email" class="form-control" id="email-input">
+                  
+                  <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+                    <span class="text-danger" *ngIf="emailInput.errors?.required">
+                        The email address field is required.
+                    </span>
+                    <span class="text-danger" *ngIf="emailInput.errors?.email">
+                        The email address isn't valid.
+                    </span>
+                  </div>
+
+                </div>
+
+                <div class="form-group">
+                  <label for="password-input">Password</label>
+                  <input type="password" required minlength="8" maxlength="16" name="password" [(ngModel)]="password" #passwordInput="ngModel" placeholder="Password" class="form-control" id="password-input">
+                  
+                  <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
+                    <span class="text-danger" *ngIf="passwordInput.errors?.required">
+                        The password field is required.
+                    </span>
+                    <span class="text-danger" *ngIf="passwordInput.errors?.minlength || passwordInput.errors?.maxlength">
+                        Your password must be between 8 and 16 characters.
+                    </span>
+                  </div>
+
+                </div>
+
+                <button (click)="onLogin()" [disabled]="!userDataForm.valid" class="btn btn-primary">Sign in</button>
+              </form>
+        </div>
+    </div>
+</div>
